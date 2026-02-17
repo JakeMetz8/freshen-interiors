@@ -155,10 +155,10 @@ Based on the inspiration images, the page should feel:
 **Technical setup:**
 - [x] 6.4 Install Astro Vercel adapter (`@astrojs/vercel`)
 - [x] 6.5 Update `astro.config.mjs` with Vercel adapter config
-- [ ] 6.6 Connect GitHub repo to Vercel project (via Vercel dashboard) — **owner action needed**
-- [ ] 6.7 Configure custom domain in Vercel dashboard — **owner action needed**
-- [ ] 6.8 Update DNS records in Namecheap to point to Vercel — **owner action needed**
-- [ ] 6.9 Deploy and verify live site
+- [x] 6.6 Connect GitHub repo to Vercel project — `https://freshen-interiors.vercel.app/`
+- [x] 6.7 Configure custom domain in Vercel dashboard — `fresheninteriors.com` + `www.fresheninteriors.com`
+- [x] 6.8 Update DNS records in Namecheap to point to Vercel
+- [x] 6.9 Deploy and verify live site
 - [ ] 6.10 Smoke test: check all links, responsiveness on live URL
 
 ## Open Items
