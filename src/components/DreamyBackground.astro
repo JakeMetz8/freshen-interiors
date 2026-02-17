@@ -1,0 +1,144 @@
+<div class="dreamy-bg" aria-hidden="true">
+  <div class="blob blob-1"></div>
+  <div class="blob blob-2"></div>
+  <div class="blob blob-3"></div>
+  <div class="blob blob-4"></div>
+  <div class="blob blob-5"></div>
+  <div class="blob blob-6"></div>
+  <div class="blob blob-7"></div>
+  <div class="blob blob-8"></div>
+  <div class="blob blob-9"></div>
+</div>
+
+<style>
+  .dreamy-bg {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+    background: var(--color-primary);
+  }
+
+  .blob {
+    position: absolute;
+    border-radius: 50%;
+  }
+
+  /* Large cream — top left, bleeds off edge */
+  .blob-1 {
+    width: 65vw;
+    height: 60vw;
+    max-width: 850px;
+    max-height: 800px;
+    background: var(--color-secondary);
+    top: -18%;
+    left: -15%;
+    filter: blur(120px);
+    opacity: 0.75;
+  }
+
+  /* Large cream — bottom right */
+  .blob-2 {
+    width: 55vw;
+    height: 60vw;
+    max-width: 750px;
+    max-height: 800px;
+    background: var(--color-secondary);
+    bottom: -22%;
+    right: -10%;
+    filter: blur(130px);
+    opacity: 0.7;
+  }
+
+  /* Large cream — center, ties everything together */
+  .blob-3 {
+    width: 50vw;
+    height: 45vw;
+    max-width: 650px;
+    max-height: 600px;
+    background: var(--color-secondary);
+    top: 20%;
+    left: 25%;
+    filter: blur(140px);
+    opacity: 0.5;
+  }
+
+  /* Medium cream — top right */
+  .blob-4 {
+    width: 35vw;
+    height: 40vw;
+    max-width: 450px;
+    max-height: 500px;
+    background: var(--color-secondary);
+    top: -5%;
+    right: 8%;
+    filter: blur(110px);
+    opacity: 0.6;
+  }
+
+  /* Medium cream — left side mid */
+  .blob-5 {
+    width: 30vw;
+    height: 35vw;
+    max-width: 400px;
+    max-height: 450px;
+    background: var(--color-secondary);
+    top: 45%;
+    left: -3%;
+    filter: blur(120px);
+    opacity: 0.55;
+  }
+
+  /* Depth blob — muted green where cream blobs overlap, adds shadow/dimension */
+  .blob-6 {
+    width: 28vw;
+    height: 28vw;
+    max-width: 350px;
+    max-height: 350px;
+    background: #3d5e4e;
+    top: 15%;
+    left: 20%;
+    filter: blur(100px);
+    opacity: 0.6;
+  }
+
+  /* Depth blob — darker accent center-right */
+  .blob-7 {
+    width: 22vw;
+    height: 22vw;
+    max-width: 280px;
+    max-height: 280px;
+    background: #2a3f32;
+    top: 40%;
+    right: 18%;
+    filter: blur(90px);
+    opacity: 0.4;
+  }
+
+  /* Small cream — bottom left fill */
+  .blob-8 {
+    width: 25vw;
+    height: 28vw;
+    max-width: 320px;
+    max-height: 360px;
+    background: var(--color-secondary);
+    bottom: 5%;
+    left: 15%;
+    filter: blur(110px);
+    opacity: 0.45;
+  }
+
+  /* Small soft green — top center, subtle depth */
+  .blob-9 {
+    width: 20vw;
+    height: 20vw;
+    max-width: 260px;
+    max-height: 260px;
+    background: #4a6b5a;
+    top: 8%;
+    left: 45%;
+    filter: blur(100px);
+    opacity: 0.35;
+  }
+</style>

@@ -1,17 +1,30 @@
 ---
-
+import BaseLayout from '../layouts/BaseLayout.astro';
+import DreamyBackground from '../components/DreamyBackground.astro';
+import Hero from '../components/Hero.astro';
+import About from '../components/About.astro';
+import ContactForm from '../components/ContactForm.astro';
+import Footer from '../components/Footer.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout
+  title="Freshen Interiors — Coming Soon"
+  description="Freshen Interiors is an interior design company offering design services for small scale remodels up to completely new construction build homes."
+>
+  <DreamyBackground />
+  <div class="page-content">
+    <main>
+      <Hero />
+      <About />
+      <ContactForm />
+    </main>
+    <Footer />
+  </div>
+</BaseLayout>
+
+<style>
+  .page-content {
+    position: relative;
+    z-index: 1;
+  }
+</style>
