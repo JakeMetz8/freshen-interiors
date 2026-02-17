@@ -1,0 +1,56 @@
+<section class="about">
+  <div class="about-inner">
+    <h2 class="about-label">Design that first the way you live</h2>
+    <p class="about-text">
+Whether you’re updating a single space or building your dream home, Freshen Interiors & Design approaches every project with intention, creativity, and care.
+
+From small-scale remodels to full custom homes, we design spaces that reflect you—balancing beauty, function, and the realities of everyday life.
+    </p>
+  </div>
+</section>
+
+<style>
+  .about {
+    padding: 4rem 3rem;
+    border-top: 1px solid rgba(246, 239, 228, 0.15);
+  }
+
+  .about-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 3rem;
+    align-items: start;
+  }
+
+  .about-label {
+    font-size: 0.75rem;
+    font-family: var(--font-body);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.15em;
+    color: var(--color-secondary);
+    opacity: 0.6;
+    padding-top: 0.25rem;
+  }
+
+  .about-text {
+    font-size: clamp(0.9375rem, 1.5vw, 1.0625rem);
+    line-height: 1.8;
+    color: var(--color-secondary);
+    opacity: 0.75;
+    max-width: 550px;
+  }
+
+  @media (max-width: 768px) {
+    .about {
+      padding: 2.5rem 1.25rem;
+    }
+
+    .about-inner {
+      grid-template-columns: 1fr;
+      gap: 1rem;
+    }
+  }
+</style>

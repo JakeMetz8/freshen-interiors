@@ -1,0 +1,272 @@
+<section class="contact">
+  <div class="contact-inner">
+    <div class="contact-info">
+      <h2 class="contact-heading">Get in Touch</h2>
+      <p class="contact-subtext">
+        Have a question or want to learn more? Reach out at
+        <a href="mailto:fresheninteriors@gmail.com" class="email-link">fresheninteriors@gmail.com</a>
+      </p>
+      <nav class="contact-socials" aria-label="Social media links">
+        <a href="https://instagram.com/freshen_interiors" target="_blank" rel="noopener noreferrer" class="contact-social-link" aria-label="Instagram">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+          <span>Instagram</span>
+        </a>
+        <a href="https://www.facebook.com/profile.php?id=61587028787237" target="_blank" rel="noopener noreferrer" class="contact-social-link" aria-label="Facebook">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
+          <span>Facebook</span>
+        </a>
+      </nav>
+    </div>
+
+    <form
+      id="contact-form"
+      class="form"
+      action="https://formspree.io/f/FORM_ID"
+      method="POST"
+    >
+      <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+      <input type="hidden" name="_timestamp" id="form-timestamp" value="" />
+
+      <div class="form-group">
+        <label for="email" class="form-label">Your Email</label>
+        <input
+          type="email"
+          id="email"
+          name="email"
+          required
+          placeholder="you@example.com"
+          class="form-input"
+        />
+      </div>
+
+      <div class="form-group">
+        <label for="message" class="form-label">Message</label>
+        <textarea
+          id="message"
+          name="message"
+          required
+          rows="4"
+          placeholder="Tell us about your project..."
+          class="form-textarea"
+        ></textarea>
+      </div>
+
+      <button type="submit" class="form-button">Send Message</button>
+    </form>
+
+    <p id="form-status" class="form-status" aria-live="polite"></p>
+  </div>
+</section>
+
+<script>
+  const timestamp = document.getElementById('form-timestamp') as HTMLInputElement;
+  if (timestamp) {
+    timestamp.value = Date.now().toString();
+  }
+
+  const form = document.getElementById('contact-form') as HTMLFormElement;
+  const status = document.getElementById('form-status') as HTMLParagraphElement;
+
+  form?.addEventListener('submit', async (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(form);
+    const honeypot = formData.get('_gotcha');
+    if (honeypot) return;
+
+    const loadTime = Number(formData.get('_timestamp'));
+    if (Date.now() - loadTime < 2000) return;
+
+    status.textContent = 'Sending...';
+    status.className = 'form-status sending';
+
+    try {
+      const response = await fetch(form.action, {
+        method: 'POST',
+        body: formData,
+        headers: { Accept: 'application/json' },
+      });
+
+      if (response.ok) {
+        status.textContent = 'Thank you! Your message has been sent.';
+        status.className = 'form-status success';
+        form.reset();
+        timestamp.value = Date.now().toString();
+      } else {
+        status.textContent = 'Something went wrong. Please try again.';
+        status.className = 'form-status error';
+      }
+    } catch {
+      status.textContent = 'Something went wrong. Please try again.';
+      status.className = 'form-status error';
+    }
+  });
+</script>
+
+<style>
+  .contact {
+    padding: 4rem 3rem;
+    border-top: 1px solid rgba(246, 239, 228, 0.15);
+  }
+
+  .contact-inner {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .contact-heading {
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
+    color: var(--color-secondary);
+    margin-bottom: 1rem;
+  }
+
+  .contact-subtext {
+    font-size: 0.9375rem;
+    color: var(--color-secondary);
+    opacity: 0.65;
+    line-height: 1.7;
+  }
+
+  .email-link {
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    font-weight: 500;
+    opacity: 1;
+  }
+
+  .email-link:hover {
+    opacity: 0.6;
+  }
+
+  .contact-socials {
+    display: flex;
+    gap: 1.5rem;
+    margin-top: 1.5rem;
+  }
+
+  .contact-social-link {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: var(--color-secondary);
+    font-size: 0.8125rem;
+    font-weight: 400;
+    letter-spacing: 0.05em;
+    opacity: 0.6;
+    transition: opacity 0.2s ease;
+  }
+
+  .contact-social-link:hover {
+    opacity: 1;
+  }
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.375rem;
+  }
+
+  .form-label {
+    font-size: 0.75rem;
+    font-weight: 500;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-secondary);
+    opacity: 0.5;
+  }
+
+  .form-input,
+  .form-textarea {
+    padding: 0.75rem 0;
+    border: none;
+    border-bottom: 1px solid rgba(246, 239, 228, 0.3);
+    background: transparent;
+    color: var(--color-secondary);
+    font-size: 1rem;
+    transition: border-color 0.2s ease;
+  }
+
+  .form-input::placeholder,
+  .form-textarea::placeholder {
+    color: var(--color-secondary);
+    opacity: 0.25;
+  }
+
+  .form-input:focus,
+  .form-textarea:focus {
+    outline: none;
+    border-bottom-color: var(--color-secondary);
+  }
+
+  .form-textarea {
+    resize: vertical;
+    min-height: 80px;
+  }
+
+  .form-button {
+    padding: 0.875rem 2rem;
+    background: var(--color-secondary);
+    color: var(--color-primary);
+    border: none;
+    border-radius: 0;
+    font-weight: 600;
+    font-size: 0.8125rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+    align-self: flex-start;
+    margin-top: 0.5rem;
+  }
+
+  .form-button:hover {
+    opacity: 0.85;
+  }
+
+  .form-status {
+    margin-top: 0.75rem;
+    font-size: 0.875rem;
+    min-height: 1.5em;
+    grid-column: 1 / -1;
+  }
+
+  .form-status.success {
+    color: var(--color-secondary);
+    font-weight: 500;
+  }
+
+  .form-status.error {
+    color: #e8a0a0;
+  }
+
+  .form-status.sending {
+    color: var(--color-secondary);
+    opacity: 0.5;
+  }
+
+  @media (max-width: 768px) {
+    .contact {
+      padding: 2.5rem 1.25rem;
+    }
+
+    .contact-inner {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+    }
+
+    .form-button {
+      width: 100%;
+      text-align: center;
+    }
+  }
+</style>
