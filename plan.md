@@ -148,18 +148,18 @@ Based on the inspiration images, the page should feel:
 ### Phase 6: Deployment
 
 **Pre-requisites (owner action needed):**
-- [ ] 7.0a Sign up for a free Vercel account at [vercel.com](https://vercel.com) (sign up with GitHub for easiest setup)
-- [ ] 7.0b Push this repo to GitHub (if not already)
-- [ ] 7.0c Provide the custom domain name (managed through Namecheap)
+- [x] 6.1 Sign up for a free Vercel account at [vercel.com](https://vercel.com) (sign up with GitHub for easiest setup)
+- [x] 6.2 Push this repo to GitHub (if not already)
+- [x] 6.3 Provide the custom domain name — `fresheninteriors.com` (managed through Namecheap)
 
 **Technical setup:**
-- [x] 6.1 Install Astro Vercel adapter (`@astrojs/vercel`)
-- [x] 6.2 Update `astro.config.mjs` with Vercel adapter config
-- [ ] 6.3 Connect GitHub repo to Vercel project (via Vercel dashboard) — **owner action needed**
-- [ ] 6.4 Configure custom domain in Vercel dashboard — **owner action needed**
-- [ ] 6.5 Update DNS records in Namecheap to point to Vercel (will provide exact A/CNAME records when ready) — **owner action needed**
-- [ ] 6.6 Deploy and verify live site
-- [ ] 6.7 Smoke test: check all links, responsiveness on live URL
+- [x] 6.4 Install Astro Vercel adapter (`@astrojs/vercel`)
+- [x] 6.5 Update `astro.config.mjs` with Vercel adapter config
+- [ ] 6.6 Connect GitHub repo to Vercel project (via Vercel dashboard) — **owner action needed**
+- [ ] 6.7 Configure custom domain in Vercel dashboard — **owner action needed**
+- [ ] 6.8 Update DNS records in Namecheap to point to Vercel — **owner action needed**
+- [ ] 6.9 Deploy and verify live site
+- [ ] 6.10 Smoke test: check all links, responsiveness on live URL
 
 ## Open Items
 
