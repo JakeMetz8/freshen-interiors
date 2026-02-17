@@ -145,15 +145,7 @@ Based on the inspiration images, the page should feel:
   - Sufficient color contrast (primary green on cream)
   - Keyboard navigation for form and links
 
-### Phase 6: Form Service Setup
-
-- [ ] 6.1 Create account on Formspree (or Web3Forms) — **owner action needed**
-- [ ] 6.2 Create a form endpoint linked to fresheninteriors@gmail.com — **owner action needed**
-- [ ] 6.3 Add the endpoint URL to the contact form `action` attribute (replace `FORM_ID` in `src/components/ContactForm.astro`)
-- [ ] 6.4 Test form submission end-to-end (confirm email delivery)
-- [ ] 6.5 Verify honeypot + timestamp bot protection works
-
-### Phase 7: Deployment
+### Phase 6: Deployment
 
 **Pre-requisites (owner action needed):**
 - [ ] 7.0a Sign up for a free Vercel account at [vercel.com](https://vercel.com) (sign up with GitHub for easiest setup)
@@ -161,17 +153,16 @@ Based on the inspiration images, the page should feel:
 - [ ] 7.0c Provide the custom domain name (managed through Namecheap)
 
 **Technical setup:**
-- [x] 7.1 Install Astro Vercel adapter (`@astrojs/vercel`)
-- [x] 7.2 Update `astro.config.mjs` with Vercel adapter config
-- [ ] 7.3 Connect GitHub repo to Vercel project (via Vercel dashboard) — **owner action needed**
-- [ ] 7.4 Configure custom domain in Vercel dashboard — **owner action needed**
-- [ ] 7.5 Update DNS records in Namecheap to point to Vercel (will provide exact A/CNAME records when ready) — **owner action needed**
-- [ ] 7.6 Deploy and verify live site
-- [ ] 7.7 Smoke test: check all links, form, responsiveness on live URL
+- [x] 6.1 Install Astro Vercel adapter (`@astrojs/vercel`)
+- [x] 6.2 Update `astro.config.mjs` with Vercel adapter config
+- [ ] 6.3 Connect GitHub repo to Vercel project (via Vercel dashboard) — **owner action needed**
+- [ ] 6.4 Configure custom domain in Vercel dashboard — **owner action needed**
+- [ ] 6.5 Update DNS records in Namecheap to point to Vercel (will provide exact A/CNAME records when ready) — **owner action needed**
+- [ ] 6.6 Deploy and verify live site
+- [ ] 6.7 Smoke test: check all links, responsiveness on live URL
 
 ## Open Items
 
-- [ ] Formspree account + form ID — owner action needed (then replace `FORM_ID` in `ContactForm.astro`)
 - [ ] Custom domain name — need from owner
-- [ ] Vercel account sign-up — owner action before Phase 7
+- [ ] Vercel account sign-up — owner action before Phase 6
 - [ ] Cross-browser testing (5.4) — manual testing after deployment
