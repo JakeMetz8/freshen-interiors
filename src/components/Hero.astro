@@ -1,82 +1,96 @@
+---
+const heroImage = '/hero-bedroom.png';
+---
+
 <section class="hero">
-  <div class="hero-logo">
-    <img src="/freshen-interiors-logo-cream.svg" alt="Freshen Interiors" class="logo-img" />
-  </div>
-  <h1 class="hero-heading">Coming Soon</h1>
-  <p class="hero-tagline">Our new website is on its way. Stay tuned.</p>
-  <div class="scroll-hint" aria-hidden="true">
-    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M7 13l5 5 5-5" />
-      <path d="M7 7l5 5 5-5" />
-    </svg>
+  <img class="hero__image" src={heroImage} alt="" aria-hidden="true" />
+  <div class="hero__overlay" aria-hidden="true"></div>
+
+  <div class="hero__card">
+    <h1 class="hero__title">A fresh look<br />is on the way</h1>
+    <p class="hero__body">
+      Our website is currently under construction.<br />
+      Scroll down to explore while we wrap up the finishing touches.
+    </p>
   </div>
 </section>
 
 <style>
   .hero {
+    position: relative;
+    width: 100%;
+    height: calc(100vh - 72px);
+    overflow: hidden;
+  }
+
+  .hero__image {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 0;
+  }
+
+  .hero__overlay {
+    position: absolute;
+    inset: 0;
+    background-color: rgba(0, 0, 0, 0.05);
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  .hero__card {
+    position: absolute;
+    right: 64px;
+    bottom: 112px;
+    z-index: 2;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
-    padding: 0 2rem 3rem;
-    text-align: center;
-    position: relative;
+    gap: 24px;
+    max-width: 663px;
+    padding: 52px 36px;
+    background-color: rgba(48, 74, 61, 0.9);
+    border-radius: 16px;
   }
 
-  .hero-logo {
-    margin-bottom: 1.5rem;
-  }
-
-  .logo-img {
-    width: clamp(280px, 40vw, 500px);
-    height: auto;
-  }
-
-  .hero-heading {
-    font-size: clamp(2.5rem, 5vw, 4.5rem);
+  .hero__title {
+    font-family: var(--font-heading);
+    font-size: 72px;
+    line-height: 1.2;
+    letter-spacing: 0.01em;
     color: var(--color-secondary);
-    letter-spacing: 0.08em;
-    margin-bottom: 1rem;
-    line-height: 1;
+    margin: 0;
   }
 
-  .hero-tagline {
-    font-size: clamp(1rem, 2vw, 1.375rem);
-    font-weight: 300;
+  .hero__body {
+    font-family: var(--font-body);
+    font-size: 22px;
+    line-height: 1.6;
     color: var(--color-secondary);
-    opacity: 0.6;
-    max-width: 500px;
-    letter-spacing: 0.03em;
+    margin: 0;
   }
 
-  .scroll-hint {
-    position: absolute;
-    bottom: 2rem;
-    color: var(--color-secondary);
-    opacity: 0.4;
-    animation: bounce 2s ease-in-out infinite;
-  }
-
-  @keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(6px); }
-  }
-
-  @media (prefers-reduced-motion: reduce) {
-    .scroll-hint {
-      animation: none;
-    }
-  }
-
-  @media (max-width: 768px) {
+  @media (max-width: 900px) {
     .hero {
-      padding: 0 1.25rem 2rem;
-      min-height: 90vh;
+      height: auto;
+      min-height: calc(100vh - 72px);
     }
 
-    .hero-logo {
-      margin-bottom: 1.5rem;
+    .hero__card {
+      position: static;
+      margin: 48px 24px;
+      padding: 32px 24px;
+      gap: 16px;
+    }
+
+    .hero__title {
+      font-size: clamp(2.25rem, 8vw, 3.5rem);
+    }
+
+    .hero__body {
+      font-size: 1rem;
     }
   }
 </style>

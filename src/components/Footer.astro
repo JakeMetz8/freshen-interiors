@@ -1,34 +1,163 @@
 ---
 const currentYear = new Date().getFullYear();
+
+const contacts = [
+  { icon: '/icons/mail.svg', label: 'fresheninteriors@gmail.com', href: 'mailto:fresheninteriors@gmail.com' },
+  { icon: '/icons/call.svg', label: '+1 (407) 435-6160', href: 'tel:+14074356160' },
+  { icon: '/icons/instagram.svg', label: 'freshen_interiors', href: 'https://instagram.com/freshen_interiors' },
+  { icon: '/icons/facebook.svg', label: 'Freshen Interiors & Design', href: 'https://www.facebook.com/profile.php?id=61587028787237' },
+];
 ---
 
 <footer class="footer">
-  <div class="footer-inner">
-    <p class="footer-copy">&copy; {currentYear} Freshen Interiors</p>
+  <div class="footer__container">
+    <a class="footer__logo" href="#top" aria-label="Freshen Interiors — Home">
+      <img src="/freshen-interiors-arch.svg" alt="Freshen Interiors" />
+    </a>
+
+    <ul class="footer__contacts">
+      {contacts.map(({ icon, label, href }) => (
+        <li class="footer__contact">
+          <a href={href}>
+            <img class="footer__icon" src={icon} alt="" aria-hidden="true" width="48" height="48" />
+            <span>{label}</span>
+          </a>
+        </li>
+      ))}
+    </ul>
+
+    <div class="footer__divider"></div>
+
+    <div class="footer__bottom">
+      <p class="footer__copy">&copy; {currentYear} Freshen Interiors. All rights reserved.</p>
+      <ul class="footer__links">
+        <li><a href="/privacy">Privacy policy</a></li>
+        <li><a href="/terms">Terms of service</a></li>
+        <li><a href="/cookies">Cookie settings</a></li>
+      </ul>
+    </div>
   </div>
 </footer>
 
 <style>
   .footer {
-    padding: 2rem 3rem;
-    border-top: 1px solid rgba(246, 239, 228, 0.15);
-  }
-
-  .footer-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .footer-copy {
-    font-size: 0.75rem;
+    width: 100%;
+    padding: 64px;
+    background-color: var(--color-primary);
     color: var(--color-secondary);
-    opacity: 0.4;
-    letter-spacing: 0.05em;
   }
 
-  @media (max-width: 768px) {
+  .footer__container {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  .footer__logo {
+    align-self: center;
+    display: inline-flex;
+  }
+
+  .footer__logo img {
+    height: 235px;
+    width: auto;
+    display: block;
+  }
+
+  .footer__contacts {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+  }
+
+  .footer__contact a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    text-align: center;
+    color: inherit;
+    text-decoration: none;
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .footer__icon {
+    width: 48px;
+    height: 48px;
+    display: block;
+  }
+
+  .footer__divider {
+    height: 1px;
+    width: 100%;
+    background-color: rgba(246, 239, 228, 0.15);
+  }
+
+  .footer__bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .footer__copy {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--color-secondary);
+  }
+
+  .footer__links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 32px;
+  }
+
+  .footer__links a {
+    color: var(--color-secondary);
+    text-decoration: underline;
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 900px) {
     .footer {
-      padding: 1.5rem 1.25rem;
+      padding: 48px 24px;
+    }
+
+    .footer__container {
+      gap: 32px;
+    }
+
+    .footer__logo img {
+      height: 180px;
+    }
+
+    .footer__contacts {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .footer__bottom {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .footer__links {
+      gap: 20px;
     }
   }
 </style>

@@ -1,0 +1,57 @@
+---
+const horizontalLogo = '/freshen-interiors-horizontal.svg';
+---
+
+<header class="navbar">
+  <a href="#top" class="navbar__logo" aria-label="Freshen Interiors — Home">
+    <img src={horizontalLogo} alt="Freshen Interiors" width="171" height="56" />
+  </a>
+  <a href="#contact" class="navbar__cta">Say Hello</a>
+</header>
+
+<style>
+  .navbar {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 72px;
+    padding: 8px 16px;
+    background-color: var(--color-secondary);
+  }
+
+  .navbar__logo {
+    display: inline-flex;
+    height: 56px;
+  }
+
+  .navbar__logo img {
+    height: 100%;
+    width: auto;
+  }
+
+  .navbar__cta {
+    position: absolute;
+    top: 50%;
+    right: 16px;
+    transform: translateY(-50%);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 4px 10px;
+    font-family: var(--font-body);
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.6;
+    color: #ffffff;
+    background-color: var(--color-primary);
+    border: 1px solid var(--color-primary);
+    border-radius: 12px;
+    transition: opacity 0.2s ease;
+  }
+
+  .navbar__cta:hover {
+    opacity: 0.9;
+  }
+</style>

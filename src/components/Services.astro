@@ -1,0 +1,133 @@
+---
+const services = [
+  {
+    icon: '/icons/construction.svg',
+    title: 'New construction',
+    body: 'From architectural collaboration to final styling, we offer full-service design for new construction homes.',
+  },
+  {
+    icon: '/icons/home.svg',
+    title: 'Residential remodels',
+    body: 'Remodeling is an opportunity to reimagine how your home works and feels.',
+  },
+  {
+    icon: '/icons/bed.svg',
+    title: 'Airbnb refresh',
+    body: 'We specialize in Airbnb and vacation rental refreshes that transform properties into elevated, experience-driven spaces.',
+  },
+];
+---
+
+<section class="services">
+  <div class="services__container">
+    <h2 class="services__title">Fresh start, fresh space</h2>
+
+    <div class="services__grid">
+      {services.map(({ icon, title, body }) => (
+        <article class="card">
+          <img class="card__icon" src={icon} alt="" aria-hidden="true" width="48" height="48" />
+          <div class="card__content">
+            <h3 class="card__title">{title}</h3>
+            <p class="card__body">{body}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .services {
+    width: 100%;
+    padding: 112px 64px;
+    background-color: var(--color-secondary);
+  }
+
+  .services__container {
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  .services__title {
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: 52px;
+    line-height: 1.2;
+    letter-spacing: 0.01em;
+    text-align: center;
+    color: #0c0c0b;
+    max-width: 768px;
+    margin-inline: auto;
+  }
+
+  .services__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 32px;
+    gap: 24px;
+    background-color: var(--color-secondary);
+    border: 1px solid rgba(12, 12, 11, 0.15);
+    border-radius: 16px;
+  }
+
+  .card__icon {
+    color: #0c0c0b;
+    line-height: 0;
+  }
+
+  .card__content {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .card__title {
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: 36px;
+    line-height: 1.4;
+    letter-spacing: 0.01em;
+    color: #0c0c0b;
+  }
+
+  .card__body {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    color: rgba(12, 12, 11, 0.75);
+  }
+
+  @media (max-width: 900px) {
+    .services {
+      padding: 64px 24px;
+    }
+
+    .services__container {
+      gap: 48px;
+    }
+
+    .services__title {
+      font-size: clamp(2rem, 6vw, 3rem);
+    }
+
+    .services__grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .card__title {
+      font-size: clamp(1.5rem, 4vw, 2rem);
+    }
+  }
+</style>

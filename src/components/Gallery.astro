@@ -1,0 +1,110 @@
+---
+const columns = [
+  [
+    { src: '/gallery/project-1.jpg', aspect: '1 / 1' },
+    { src: '/gallery/project-2.jpg', aspect: '1 / 1' },
+  ],
+  [
+    { src: '/gallery/project-3.jpg', aspect: '405 / 228' },
+    { src: '/gallery/project-4.jpg', aspect: '405 / 228' },
+    { src: '/gallery/project-5.jpg', aspect: '1 / 1' },
+  ],
+  [
+    { src: '/gallery/project-6.jpg', aspect: '1 / 1' },
+    { src: '/gallery/project-7.jpg', aspect: '1 / 1' },
+  ],
+];
+---
+
+<section class="gallery">
+  <div class="gallery__container">
+    <h2 class="gallery__title">Featured projects</h2>
+
+    <div class="gallery__grid">
+      {columns.map((col) => (
+        <div class="gallery__column">
+          {col.map(({ src, aspect }) => (
+            <div class="gallery__frame" style={`aspect-ratio: ${aspect};`}>
+              <img class="gallery__image" src={src} alt="" loading="lazy" />
+            </div>
+          ))}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .gallery {
+    width: 100%;
+    padding: 112px 64px;
+    background-color: var(--color-primary);
+  }
+
+  .gallery__container {
+    display: flex;
+    flex-direction: column;
+    gap: 80px;
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  .gallery__title {
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: 52px;
+    line-height: 1.2;
+    letter-spacing: 0.01em;
+    text-align: center;
+    color: var(--color-secondary);
+  }
+
+  .gallery__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+    align-items: start;
+  }
+
+  .gallery__column {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .gallery__frame {
+    width: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .gallery__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  @media (max-width: 900px) {
+    .gallery {
+      padding: 64px 24px;
+    }
+
+    .gallery__container {
+      gap: 48px;
+    }
+
+    .gallery__title {
+      font-size: clamp(2rem, 6vw, 3rem);
+    }
+
+    .gallery__grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .gallery__column {
+      gap: 20px;
+    }
+  }
+</style>
