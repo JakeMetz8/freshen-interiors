@@ -16,7 +16,7 @@ const horizontalLogo = '/freshen-interiors-horizontal.svg';
     align-items: center;
     justify-content: center;
     width: 100%;
-    height: 72px;
+    height: var(--navbar-h);
     padding: 8px 16px;
     background-color: var(--color-secondary);
   }
@@ -53,5 +53,23 @@ const horizontalLogo = '/freshen-interiors-horizontal.svg';
 
   .navbar__cta:hover {
     opacity: 0.9;
+  }
+
+  /* Mobile frame (Figma "Navbar / 3 /", 375x56). At the desktop sizes the
+     centred logo and the right-pinned CTA collide below 390px, so both scale
+     down here. */
+  @media (max-width: 900px) {
+    .navbar {
+      padding: 8px;
+    }
+
+    .navbar__logo {
+      height: 40px;
+    }
+
+    .navbar__cta {
+      right: 8px;
+      font-size: 12px;
+    }
   }
 </style>

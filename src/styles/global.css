@@ -11,6 +11,17 @@
   --color-secondary: #F6EFE4;
   --font-heading: 'Bungee', sans-serif;
   --font-body: 'Jost', sans-serif;
+
+  /* Navbar height. The hero sizes itself against this to fill exactly one
+     viewport, so the two must stay in step — keep the breakpoint below in
+     sync with the one in Hero.astro and Navbar.astro. */
+  --navbar-h: 72px;
+}
+
+@media (max-width: 900px) {
+  :root {
+    --navbar-h: 56px;
+  }
 }
 
 html {

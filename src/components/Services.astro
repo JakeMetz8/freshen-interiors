@@ -37,16 +37,22 @@ const services = [
 </section>
 
 <style>
+  /* The design file pins two frames: mobile (375) and desktop (1440). Every
+     size below is a clamp that interpolates linearly between them, hitting the
+     frame value exactly at each end and sliding smoothly in between, so the
+     tablet range is derived from the design rather than guessed. Each ramp is
+     `intercept + slope*vw`, where slope = (desktop - mobile) / 1065px * 100. */
   .services {
     width: 100%;
-    padding: 112px 64px;
+    padding: clamp(64px, calc(47.1px + 4.507vw), 112px)
+             clamp(20px, calc(4.51px + 4.1315vw), 64px);
     background-color: var(--color-secondary);
   }
 
   .services__container {
     display: flex;
     flex-direction: column;
-    gap: 80px;
+    gap: clamp(48px, calc(36.73px + 3.0047vw), 80px);
     max-width: 1280px;
     margin: 0 auto;
   }
@@ -54,7 +60,7 @@ const services = [
   .services__title {
     margin: 0;
     font-family: var(--font-heading);
-    font-size: 52px;
+    font-size: clamp(2rem, calc(30.37px + 1.5023vw), 52px);
     line-height: 1.2;
     letter-spacing: 0.01em;
     text-align: center;
@@ -63,18 +69,22 @@ const services = [
     margin-inline: auto;
   }
 
+  /* auto-fit walks 1 -> 2 -> 3 columns on its own, so the middle range never
+     forces three columns into a width that cannot hold them. min(280px, 100%)
+     stops the track outrunning the container on very narrow screens. */
   .services__grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 32px;
+    grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+    gap: clamp(24px, calc(21.18px + 0.7512vw), 32px);
   }
 
   .card {
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    padding: 32px;
-    gap: 24px;
+    align-items: center;
+    justify-content: start;
+    padding: clamp(24px, calc(21.18px + 0.7512vw), 32px);
+    gap: clamp(20px, calc(18.59px + 0.3756vw), 24px);
     background-color: var(--color-secondary);
     border: 1px solid rgba(12, 12, 11, 0.15);
     border-radius: 16px;
@@ -88,16 +98,20 @@ const services = [
   .card__content {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: clamp(12px, calc(10.59px + 0.3756vw), 16px);
   }
 
   .card__title {
     margin: 0;
     font-family: var(--font-heading);
-    font-size: 36px;
+    font-size: clamp(24px, calc(19.77px + 1.1268vw), 36px);
     line-height: 1.4;
     letter-spacing: 0.01em;
     color: #0c0c0b;
+    text-align: center;
+    /* Bungee sets a wide min-content; let a long word break rather than push
+       the card past its track. */
+    overflow-wrap: break-word;
   }
 
   .card__body {
@@ -106,28 +120,21 @@ const services = [
     font-size: 16px;
     line-height: 1.6;
     color: rgba(12, 12, 11, 0.75);
+    text-align: center;
   }
 
-  @media (max-width: 900px) {
-    .services {
-      padding: 64px 24px;
+  /* Alignment is the one thing that cannot interpolate: the mobile frame
+     centres the card text, the desktop frame left-aligns it. Flip at the point
+     the cards stop being full-width and the grid gains a second column —
+     centred reads well stacked, left reads better in a narrow column. The icon
+     stays left throughout, as in both frames. */
+  @media (min-width: 650px) {
+    .card {
+      align-items: flex-start;
     }
-
-    .services__container {
-      gap: 48px;
-    }
-
-    .services__title {
-      font-size: clamp(2rem, 6vw, 3rem);
-    }
-
-    .services__grid {
-      grid-template-columns: 1fr;
-      gap: 20px;
-    }
-
-    .card__title {
-      font-size: clamp(1.5rem, 4vw, 2rem);
+    .card__title,
+    .card__body {
+      text-align: left;
     }
   }
 </style>
