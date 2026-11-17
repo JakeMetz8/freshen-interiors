@@ -1,0 +1,140 @@
+---
+const services = [
+  {
+    icon: '/icons/construction.svg',
+    title: 'New construction',
+    body: 'From architectural collaboration to final styling, we offer full-service design for new construction homes.',
+  },
+  {
+    icon: '/icons/home.svg',
+    title: 'Residential remodels',
+    body: 'Remodeling is an opportunity to reimagine how your home works and feels.',
+  },
+  {
+    icon: '/icons/bed.svg',
+    title: 'Airbnb refresh',
+    body: 'We specialize in Airbnb and vacation rental refreshes that transform properties into elevated, experience-driven spaces.',
+  },
+];
+---
+
+<section class="services">
+  <div class="services__container">
+    <h2 class="services__title">Fresh start, fresh space</h2>
+
+    <div class="services__grid">
+      {services.map(({ icon, title, body }) => (
+        <article class="card">
+          <img class="card__icon" src={icon} alt="" aria-hidden="true" width="48" height="48" />
+          <div class="card__content">
+            <h3 class="card__title">{title}</h3>
+            <p class="card__body">{body}</p>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  /* The design file pins two frames: mobile (375) and desktop (1440). Every
+     size below is a clamp that interpolates linearly between them, hitting the
+     frame value exactly at each end and sliding smoothly in between, so the
+     tablet range is derived from the design rather than guessed. Each ramp is
+     `intercept + slope*vw`, where slope = (desktop - mobile) / 1065px * 100. */
+  .services {
+    width: 100%;
+    padding: clamp(64px, calc(47.1px + 4.507vw), 112px)
+             clamp(20px, calc(4.51px + 4.1315vw), 64px);
+    background-color: var(--color-secondary);
+  }
+
+  .services__container {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(48px, calc(36.73px + 3.0047vw), 80px);
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  .services__title {
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, calc(30.37px + 1.5023vw), 52px);
+    line-height: 1.2;
+    letter-spacing: 0.01em;
+    text-align: center;
+    color: #0c0c0b;
+    max-width: 768px;
+    margin-inline: auto;
+  }
+
+  /* auto-fit walks 1 -> 2 -> 3 columns on its own, so the middle range never
+     forces three columns into a width that cannot hold them. min(280px, 100%)
+     stops the track outrunning the container on very narrow screens. */
+  .services__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
+    gap: clamp(24px, calc(21.18px + 0.7512vw), 32px);
+  }
+
+  .card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: start;
+    padding: clamp(24px, calc(21.18px + 0.7512vw), 32px);
+    gap: clamp(20px, calc(18.59px + 0.3756vw), 24px);
+    background-color: var(--color-secondary);
+    border: 1px solid rgba(12, 12, 11, 0.15);
+    border-radius: 16px;
+  }
+
+  .card__icon {
+    color: #0c0c0b;
+    line-height: 0;
+  }
+
+  .card__content {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(12px, calc(10.59px + 0.3756vw), 16px);
+  }
+
+  .card__title {
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: clamp(24px, calc(19.77px + 1.1268vw), 36px);
+    line-height: 1.4;
+    letter-spacing: 0.01em;
+    color: #0c0c0b;
+    text-align: center;
+    /* Bungee sets a wide min-content; let a long word break rather than push
+       the card past its track. */
+    overflow-wrap: break-word;
+  }
+
+  .card__body {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    color: rgba(12, 12, 11, 0.75);
+    text-align: center;
+  }
+
+  /* Alignment is the one thing that cannot interpolate: the mobile frame
+     centres the card text, the desktop frame left-aligns it. Flip at the point
+     the cards stop being full-width and the grid gains a second column —
+     centred reads well stacked, left reads better in a narrow column. The icon
+     stays left throughout, as in both frames. */
+  @media (min-width: 650px) {
+    .card {
+      align-items: flex-start;
+    }
+    .card__title,
+    .card__body {
+      text-align: left;
+    }
+  }
+</style>

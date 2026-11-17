@@ -1,56 +1,116 @@
-<section class="about">
-  <div class="about-inner">
-    <h2 class="about-label">Design that fits the way you live</h2>
-    <p class="about-text">
-Whether you’re updating a single space or building your dream home, Freshen Interiors & Design approaches every project with intention, creativity, and care.
+---
+const portrait = '/about-portrait.png';
+---
 
-From small-scale remodels to full custom homes, we design spaces that reflect you—balancing beauty, function, and the realities of everyday life.
-    </p>
+<section class="about">
+  <div class="about__container">
+    <div class="about__content">
+      <h2 class="about__title">Our approach</h2>
+      <div class="about__body">
+        <p>Freshen is rooted in strong client relationships and a collaborative, enjoyable design process.</p>
+        <p>We believe great design should be exciting, livable, and practical—balancing creativity with real-world function so your home works just as good as it looks.</p>
+        <p>From space planning and finish selections to custom interiors and styling, Freshen Interiors &amp; Design delivers thoughtful, personalized design solutions tailored to your lifestyle.</p>
+      </div>
+    </div>
+    <img class="about__media" src={portrait} alt="" loading="lazy" />
   </div>
 </section>
 
 <style>
+  /* Interpolated between the two frames the design pins, mobile (375) and
+     desktop (1440), as in Services and Gallery. */
   .about {
-    padding: 4rem 3rem;
-    border-top: 1px solid rgba(246, 239, 228, 0.15);
+    width: 100%;
+    padding: clamp(64px, calc(47.1px + 4.507vw), 112px)
+             clamp(20px, calc(4.51px + 4.1315vw), 64px) 0;
+    background-color: var(--color-secondary);
   }
 
-  .about-inner {
-    max-width: 1200px;
+  .about__container {
+    position: relative;
+    max-width: 1280px;
     margin: 0 auto;
-    display: grid;
-    grid-template-columns: auto 1fr;
-    gap: 3rem;
-    align-items: start;
+    min-height: 752px;
+    display: flex;
+    align-items: center;
   }
 
-  .about-label {
-    font-size: 0.75rem;
+  .about__content {
+    /* 624/1280. Proportional rather than a fixed 624px so the text column and
+       the image hold the frame's 80px gap at every width — at fixed widths the
+       576px image sat on top of the copy anywhere below ~1360px. */
+    max-width: 48.75%;
+    display: flex;
+    flex-direction: column;
+    gap: clamp(20px, calc(18.59px + 0.3756vw), 24px);
+  }
+
+  .about__title {
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, calc(30.37px + 1.5023vw), 52px);
+    line-height: 1.2;
+    letter-spacing: 0.01em;
+    color: #0c0c0b;
+  }
+
+  .about__body {
+    display: flex;
+    flex-direction: column;
+    /* Both frames separate the paragraphs with a blank line, i.e. one full
+       line box (1.6em), not 1em. */
+    gap: 1.6em;
     font-family: var(--font-body);
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.15em;
-    color: var(--color-secondary);
-    opacity: 0.6;
-    padding-top: 0.25rem;
+    font-size: clamp(16px, calc(15.3px + 0.1878vw), 18px);
+    line-height: 1.6;
+    color: rgba(12, 12, 11, 0.75);
   }
 
-  .about-text {
-    font-size: clamp(0.9375rem, 1.5vw, 1.0625rem);
-    line-height: 1.8;
-    color: var(--color-secondary);
-    opacity: 0.75;
-    max-width: 550px;
+  .about__body p {
+    margin: 0;
   }
 
-  @media (max-width: 768px) {
-    .about {
-      padding: 2.5rem 1.25rem;
+  .about__media {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    /* 576/1280, the counterpart to .about__content's 48.75%. */
+    width: 45%;
+    height: auto;
+    display: block;
+    pointer-events: none;
+  }
+
+  /* Mobile frame (Figma "Layout / 1 /", 375x892): the portrait drops below the
+     copy at full width, and both heading and body centre. */
+  @media (max-width: 900px) {
+    .about__container {
+      flex-direction: column;
+      min-height: 0;
+      gap: 48px;
     }
 
-    .about-inner {
-      grid-template-columns: 1fr;
-      gap: 1rem;
+    .about__content {
+      max-width: none;
+    }
+
+    .about__title,
+    .about__body {
+      text-align: center;
+    }
+
+    /* The frame crops the portrait to 335x405 and rounds it. Its CROP transform
+       keeps the lower ~80% of the source, which object-position: bottom
+       reproduces under object-fit: cover. */
+    .about__media {
+      position: static;
+      width: 100%;
+      max-width: none;
+      aspect-ratio: 335 / 405;
+      object-fit: cover;
+      object-position: bottom;
+      border-radius: 16px;
+      margin: 0;
     }
   }
 </style>

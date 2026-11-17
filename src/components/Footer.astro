@@ -1,34 +1,234 @@
 ---
 const currentYear = new Date().getFullYear();
+
+const contacts = [
+  { icon: '/icons/mail.svg', label: 'fresheninteriors@gmail.com', href: 'mailto:fresheninteriors@gmail.com', copy: 'fresheninteriors@gmail.com' },
+  { icon: '/icons/call.svg', label: '+1 (407) 435-6160', href: 'tel:+14074356160' },
+  { icon: '/icons/instagram.svg', label: 'freshen_interiors', href: 'https://instagram.com/freshen_interiors', external: true },
+  { icon: '/icons/facebook.svg', label: 'Freshen Interiors & Design', href: 'https://www.facebook.com/profile.php?id=61587028787237', external: true },
+];
 ---
 
 <footer class="footer">
-  <div class="footer-inner">
-    <p class="footer-copy">&copy; {currentYear} Freshen Interiors</p>
+  <div class="footer__container">
+    <a class="footer__logo" href="#top" aria-label="Freshen Interiors — Home">
+      <img src="/freshen-interiors-arch.svg" alt="Freshen Interiors" />
+    </a>
+
+    <ul class="footer__contacts">
+      {contacts.map(({ icon, label, href, external, copy }) => (
+        <li class="footer__contact">
+          <a
+            href={href}
+            target={external ? '_blank' : undefined}
+            rel={external ? 'noopener noreferrer' : undefined}
+          >
+            <img class="footer__icon" src={icon} alt="" aria-hidden="true" width="48" height="48" />
+            <span>{label}</span>
+          </a>
+          {copy && (
+            <button type="button" class="footer__copy-btn" data-copy={copy}>
+              <span class="footer__copy-label">Copy email</span>
+              <span class="footer__copy-status" aria-live="polite"></span>
+            </button>
+          )}
+        </li>
+      ))}
+    </ul>
+
+    <div class="footer__divider"></div>
+
+    <div class="footer__bottom">
+      <p class="footer__copy">&copy; {currentYear} Freshen Interiors. All rights reserved.</p>
+      <ul class="footer__links">
+        <li><a href="/privacy">Privacy policy</a></li>
+        <li><a href="/terms">Terms of service</a></li>
+        <li><a href="/cookies">Cookie settings</a></li>
+      </ul>
+    </div>
   </div>
 </footer>
 
+<script>
+  document.querySelectorAll<HTMLButtonElement>('.footer__copy-btn').forEach((btn) => {
+    const status = btn.querySelector<HTMLSpanElement>('.footer__copy-status');
+    let timer: number | undefined;
+
+    btn.addEventListener('click', async () => {
+      const text = btn.dataset.copy;
+      if (!text || !status) return;
+      try {
+        await navigator.clipboard.writeText(text);
+        status.textContent = 'Copied!';
+      } catch {
+        // Clipboard blocked: show the address pre-selected so it can be copied by hand.
+        window.prompt('Copy this email address:', text);
+        return;
+      }
+      btn.classList.add('is-copied');
+      window.clearTimeout(timer);
+      timer = window.setTimeout(() => {
+        btn.classList.remove('is-copied');
+        status.textContent = '';
+      }, 2000);
+    });
+  });
+</script>
+
 <style>
   .footer {
-    padding: 2rem 3rem;
-    border-top: 1px solid rgba(246, 239, 228, 0.15);
-  }
-
-  .footer-inner {
-    max-width: 1200px;
-    margin: 0 auto;
-  }
-
-  .footer-copy {
-    font-size: 0.75rem;
+    width: 100%;
+    padding: 64px;
+    background-color: var(--color-primary);
     color: var(--color-secondary);
-    opacity: 0.4;
-    letter-spacing: 0.05em;
   }
 
-  @media (max-width: 768px) {
+  .footer__container {
+    max-width: 1280px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  .footer__logo {
+    align-self: center;
+    display: inline-flex;
+  }
+
+  .footer__logo img {
+    height: 235px;
+    width: auto;
+    display: block;
+  }
+
+  .footer__contacts {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 32px;
+  }
+
+  .footer__contact a {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    text-align: center;
+    color: inherit;
+    text-decoration: none;
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .footer__contact {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .footer__copy-btn {
+    appearance: none;
+    background: none;
+    border: 1px solid rgba(246, 239, 228, 0.4);
+    border-radius: 999px;
+    padding: 4px 14px;
+    color: var(--color-secondary);
+    font-family: var(--font-body);
+    font-size: 13px;
+    line-height: 1.6;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+  }
+
+  .footer__copy-btn:hover {
+    border-color: var(--color-secondary);
+    background-color: rgba(246, 239, 228, 0.08);
+  }
+
+  .footer__copy-btn:focus-visible {
+    outline: 2px solid var(--color-secondary);
+    outline-offset: 2px;
+  }
+
+  .footer__copy-btn.is-copied .footer__copy-label {
+    display: none;
+  }
+
+  .footer__icon {
+    width: 48px;
+    height: 48px;
+    display: block;
+  }
+
+  .footer__divider {
+    height: 1px;
+    width: 100%;
+    background-color: rgba(246, 239, 228, 0.15);
+  }
+
+  .footer__bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .footer__copy {
+    margin: 0;
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--color-secondary);
+  }
+
+  .footer__links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 32px;
+  }
+
+  .footer__links a {
+    color: var(--color-secondary);
+    text-decoration: underline;
+    font-family: var(--font-body);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  @media (max-width: 900px) {
     .footer {
-      padding: 1.5rem 1.25rem;
+      padding: 48px 24px;
+    }
+
+    .footer__container {
+      gap: 32px;
+    }
+
+    .footer__logo img {
+      height: 180px;
+    }
+
+    .footer__contacts {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    .footer__bottom {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .footer__links {
+      gap: 20px;
     }
   }
 </style>

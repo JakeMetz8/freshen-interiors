@@ -1,0 +1,115 @@
+---
+const columns = [
+  [
+    { src: '/gallery/project-1.jpg', aspect: '1 / 1' },
+    { src: '/gallery/project-2.jpg', aspect: '1 / 1' },
+  ],
+  [
+    { src: '/gallery/project-3.jpg', aspect: '405 / 228' },
+    { src: '/gallery/project-4.jpg', aspect: '405 / 228' },
+    { src: '/gallery/project-5.jpg', aspect: '1 / 1' },
+  ],
+  [
+    { src: '/gallery/project-6.jpg', aspect: '1 / 1' },
+    { src: '/gallery/project-7.jpg', aspect: '1 / 1' },
+  ],
+];
+---
+
+<section class="gallery">
+  <div class="gallery__container">
+    <h2 class="gallery__title">Featured projects</h2>
+
+    <div class="gallery__grid">
+      {columns.map((col) => (
+        <div class="gallery__column">
+          {col.map(({ src, aspect }) => (
+            <div class="gallery__frame" style={`aspect-ratio: ${aspect};`}>
+              <img class="gallery__image" src={src} alt="" loading="lazy" />
+            </div>
+          ))}
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Same two-frame interpolation as Services: mobile (375) and desktop (1440)
+     are the only widths the design pins, so each value is a clamp that lands on
+     the frame value exactly at both ends and slides between them. */
+  .gallery {
+    width: 100%;
+    padding: clamp(64px, calc(47.1px + 4.507vw), 112px)
+             clamp(20px, calc(4.51px + 4.1315vw), 64px);
+    background-color: var(--color-primary);
+  }
+
+  .gallery__container {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(48px, calc(36.73px + 3.0047vw), 80px);
+    max-width: 1280px;
+    margin: 0 auto;
+  }
+
+  .gallery__title {
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, calc(30.37px + 1.5023vw), 52px);
+    line-height: 1.2;
+    letter-spacing: 0.01em;
+    text-align: center;
+    color: var(--color-secondary);
+    max-width: 768px;
+    margin-inline: auto;
+  }
+
+  /* Columns stack on phones and sit three-up from 700px, where each is finally
+     wide enough to carry an image. A two-column step is deliberately skipped:
+     with three fixed columns it would strand the third alone on a second row
+     and leave half that row empty. */
+  .gallery__grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: clamp(24px, calc(21.18px + 0.7512vw), 32px);
+    align-items: start;
+    /* While stacked, hold the images near the 335px the mobile frame asks for.
+       Without this a 690px-wide tablet would blow them up to ~630px, twice the
+       design size, and make the jump to three columns far more abrupt. Below
+       ~490px the container is already narrower than this, so phones are
+       untouched. width:100% is required, not redundant: the grid is a flex
+       item, and margin-inline:auto cancels the default stretch, which would
+       otherwise collapse the 1fr track to zero width. */
+    width: 100%;
+    max-width: 440px;
+    margin-inline: auto;
+  }
+
+  .gallery__column {
+    display: flex;
+    flex-direction: column;
+    gap: clamp(24px, calc(21.18px + 0.7512vw), 32px);
+  }
+
+  @media (min-width: 700px) {
+    .gallery__grid {
+      grid-template-columns: repeat(3, 1fr);
+      max-width: none;
+    }
+  }
+
+  .gallery__frame {
+    width: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+  }
+
+  .gallery__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+</style>

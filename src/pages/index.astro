@@ -1,9 +1,10 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import DreamyBackground from '../components/DreamyBackground.astro';
+import Navbar from '../components/Navbar.astro';
 import Hero from '../components/Hero.astro';
+import Services from '../components/Services.astro';
+import Gallery from '../components/Gallery.astro';
 import About from '../components/About.astro';
-import ContactForm from '../components/ContactForm.astro';
 import Footer from '../components/Footer.astro';
 ---
 
@@ -11,20 +12,12 @@ import Footer from '../components/Footer.astro';
   title="Freshen Interiors — Coming Soon"
   description="Freshen Interiors is an interior design company offering design services for small scale remodels up to completely new construction build homes."
 >
-  <DreamyBackground />
-  <div class="page-content">
-    <main>
-      <Hero />
-      <About />
-      <ContactForm />
-    </main>
-    <Footer />
-  </div>
+  <Navbar />
+  <main>
+    <Hero />
+    <Services />
+    <Gallery />
+    <About />
+  </main>
+  <Footer />
 </BaseLayout>
-
-<style>
-  .page-content {
-    position: relative;
-    z-index: 1;
-  }
-</style>
