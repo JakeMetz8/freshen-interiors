@@ -4,8 +4,8 @@ const currentYear = new Date().getFullYear();
 const contacts = [
   { icon: '/icons/mail.svg', label: 'fresheninteriors@gmail.com', href: 'mailto:fresheninteriors@gmail.com' },
   { icon: '/icons/call.svg', label: '+1 (407) 435-6160', href: 'tel:+14074356160' },
-  { icon: '/icons/instagram.svg', label: 'freshen_interiors', href: 'https://instagram.com/freshen_interiors' },
-  { icon: '/icons/facebook.svg', label: 'Freshen Interiors & Design', href: 'https://www.facebook.com/profile.php?id=61587028787237' },
+  { icon: '/icons/instagram.svg', label: 'freshen_interiors', href: 'https://instagram.com/freshen_interiors', external: true },
+  { icon: '/icons/facebook.svg', label: 'Freshen Interiors & Design', href: 'https://www.facebook.com/profile.php?id=61587028787237', external: true },
 ];
 ---
 
@@ -16,9 +16,13 @@ const contacts = [
     </a>
 
     <ul class="footer__contacts">
-      {contacts.map(({ icon, label, href }) => (
+      {contacts.map(({ icon, label, href, external }) => (
         <li class="footer__contact">
-          <a href={href}>
+          <a
+            href={href}
+            target={external ? '_blank' : undefined}
+            rel={external ? 'noopener noreferrer' : undefined}
+          >
             <img class="footer__icon" src={icon} alt="" aria-hidden="true" width="48" height="48" />
             <span>{label}</span>
           </a>
