@@ -2,7 +2,7 @@
 const currentYear = new Date().getFullYear();
 
 const contacts = [
-  { icon: '/icons/mail.svg', label: 'fresheninteriors@gmail.com', href: 'mailto:fresheninteriors@gmail.com' },
+  { icon: '/icons/mail.svg', label: 'fresheninteriors@gmail.com', href: 'mailto:fresheninteriors@gmail.com', copy: 'fresheninteriors@gmail.com' },
   { icon: '/icons/call.svg', label: '+1 (407) 435-6160', href: 'tel:+14074356160' },
   { icon: '/icons/instagram.svg', label: 'freshen_interiors', href: 'https://instagram.com/freshen_interiors', external: true },
   { icon: '/icons/facebook.svg', label: 'Freshen Interiors & Design', href: 'https://www.facebook.com/profile.php?id=61587028787237', external: true },
@@ -16,7 +16,7 @@ const contacts = [
     </a>
 
     <ul class="footer__contacts">
-      {contacts.map(({ icon, label, href, external }) => (
+      {contacts.map(({ icon, label, href, external, copy }) => (
         <li class="footer__contact">
           <a
             href={href}
@@ -26,6 +26,12 @@ const contacts = [
             <img class="footer__icon" src={icon} alt="" aria-hidden="true" width="48" height="48" />
             <span>{label}</span>
           </a>
+          {copy && (
+            <button type="button" class="footer__copy-btn" data-copy={copy}>
+              <span class="footer__copy-label">Copy email</span>
+              <span class="footer__copy-status" aria-live="polite"></span>
+            </button>
+          )}
         </li>
       ))}
     </ul>
@@ -42,6 +48,32 @@ const contacts = [
     </div>
   </div>
 </footer>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('.footer__copy-btn').forEach((btn) => {
+    const status = btn.querySelector<HTMLSpanElement>('.footer__copy-status');
+    let timer: number | undefined;
+
+    btn.addEventListener('click', async () => {
+      const text = btn.dataset.copy;
+      if (!text || !status) return;
+      try {
+        await navigator.clipboard.writeText(text);
+        status.textContent = 'Copied!';
+      } catch {
+        // Clipboard blocked: show the address pre-selected so it can be copied by hand.
+        window.prompt('Copy this email address:', text);
+        return;
+      }
+      btn.classList.add('is-copied');
+      window.clearTimeout(timer);
+      timer = window.setTimeout(() => {
+        btn.classList.remove('is-copied');
+        status.textContent = '';
+      }, 2000);
+    });
+  });
+</script>
 
 <style>
   .footer {
@@ -90,6 +122,41 @@ const contacts = [
     font-family: var(--font-body);
     font-size: 16px;
     line-height: 1.6;
+  }
+
+  .footer__contact {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .footer__copy-btn {
+    appearance: none;
+    background: none;
+    border: 1px solid rgba(246, 239, 228, 0.4);
+    border-radius: 999px;
+    padding: 4px 14px;
+    color: var(--color-secondary);
+    font-family: var(--font-body);
+    font-size: 13px;
+    line-height: 1.6;
+    cursor: pointer;
+    transition: border-color 0.2s ease, background-color 0.2s ease;
+  }
+
+  .footer__copy-btn:hover {
+    border-color: var(--color-secondary);
+    background-color: rgba(246, 239, 228, 0.08);
+  }
+
+  .footer__copy-btn:focus-visible {
+    outline: 2px solid var(--color-secondary);
+    outline-offset: 2px;
+  }
+
+  .footer__copy-btn.is-copied .footer__copy-label {
+    display: none;
   }
 
   .footer__icon {
